@@ -12,7 +12,14 @@ export default function Home() {
 
   const { data: quote, refetch: refreshQuote, isLoading } = useQuery({
     queryKey: ['/api/quotes/random'],
-    retry: false,
+    retry: 1,
+    onError: (error) => {
+      toast({
+        variant: "destructive",
+        title: "Error fetching quote",
+        description: "Don't worry! Using our backup quote system."
+      });
+    }
   });
 
   useEffect(() => {
@@ -41,7 +48,7 @@ export default function Home() {
       }}
     >
       <div className="absolute inset-0 backdrop-blur-xl bg-background/50" />
-      
+
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
