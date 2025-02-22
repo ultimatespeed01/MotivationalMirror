@@ -11,10 +11,17 @@ export async function fetchRandomQuote(): Promise<Quote> {
   if (!response.ok) {
     throw new Error("Failed to fetch quote");
   }
-  
+
   const data: QuotableResponse = await response.json();
+
+  // Convert the string _id to a number for our schema
+  // Use a hash of the string to generate a stable number
+  const id = Array.from(data._id).reduce((acc, char) => {
+    return ((acc << 5) - acc) + char.charCodeAt(0);
+  }, 0);
+
   return {
-    id: parseInt(data._id, 10),
+    id: Math.abs(id), // Ensure positive number
     content: data.content,
     author: data.author
   };

@@ -1,4 +1,4 @@
-const UNSPLASH_ACCESS_KEY = "your-unsplash-access-key"; // Add this to env vars in production
+const UNSPLASH_ACCESS_KEY = "ZyGAWLKApaJrfuiIdaqA4PR5LktN12C7yrzNvjpNC_s";
 
 export async function getRandomPhoto(): Promise<string> {
   const response = await fetch(
